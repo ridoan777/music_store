@@ -1,0 +1,169 @@
+MUSIC STORE - A Spotify Clone
+YT: https://www.youtube.com/watch?v=ZzuqwqP1wAQ
+By John Weeks Dev [1:22h]
+------------------------------------------------------------------------------------------------------------
+[0]
+
+[1] INSTALLATION:
+
+   [1.1] VUE:
+
+      npm create vue@latest
+
+         - vue : yes
+         - router : yes
+         - pinia : yes
+         - Vite : pre-built
+
+   [1.2] TAILWIND CSS:
+
+      [1.2.1] Installation:
+
+         npm install -D tailwindcss@3 postcss autoprefixer
+         npx tailwindcss init -p
+
+            - Legacy for v3.x
+            - works fine
+            - changed in v4.x
+            - Might switch to : npm install tailwindcss @tailwindcss/vite
+            - Legacy link: https://v3.tailwindcss.com/docs/guides/vite#vue
+
+      [1.2.2] tailwind.config.js:
+
+         export default {
+            content: [
+               "./index.html",
+               "./src/**/*.{vue,js,ts,jsx,tsx}",
+            ],
+            ...
+         }
+
+      [1.2.3] Directives:
+
+         -- Copy these directives and paste them into 'src/assets/main.css'. We can also remove all other styles:
+
+            @tailwind base;
+            @tailwind components;
+            @tailwind utilities;
+
+   [1.3] THIRD-PARTY ADD-ONS:
+
+      [1.3.1] Run this:
+
+         npm i pinia-plugin-persistedstate uniqolor vue-material-design-icons
+
+            - pinia-plugin-persistedstate : A package. Configurable persistence and rehydration of Pinia stores. Pinia states are lost on browser reloads. So a persistences strategy is needed to save them in localStorage (default), sessionStorage, etc.
+
+               Learn more: https://www.npmjs.com/package/pinia-plugin-persistedstate?activeTab=readme
+
+            - uniqolor : A library generating colors from texts.
+
+               Link: https://www.npmjs.com/package/uniqolor
+
+            - vue-material-design-icons : Makes vue components for each icon.
+
+               Link: https://www.npmjs.com/package/vue-material-design-icons
+               Demos : https://pictogrammers.com/library/mdi/
+
+   [1.4] 
+
+
+[2] FOLDER PREPARATION:
+
+   [2.1] REMOVED FILES:
+
+      -- Remove these files/folders:
+
+         - 'src/components/Icons' folder
+         - 'src/components/*.vue' all pre-built vue files
+         - 'src/views/AboutView.vue' file
+      
+   [2.2] DEFAULTED FILES:
+
+      -- Make these files default for project ready:
+
+         -- 'src/router/index.js' :
+
+            import { createRouter, createWebHistory } from 'vue-router'
+            import HomeView from '../views/HomeView.vue'
+
+            const router = createRouter({
+            history: createWebHistory(import.meta.env.BASE_URL),
+            routes: [
+               {
+                  path: '/',
+                  name: 'home',
+                  component: HomeView,
+               },
+            ],
+            })
+            export default router
+
+         -- 'src/App.vue':
+
+            <script setup>
+
+            </script>
+
+            <template>
+               <div class="bg-red-400">COOL</div>
+               <routerView/>
+            </template>
+
+         -- 'src/views/HoemView.vue':
+
+            <script setup>
+            </script>
+
+            <template>
+            </template>
+
+   [2.3] PROJECT READY VERSION:
+
+      [2.3.1] MAIN.JS:
+
+         import './assets/main.css'
+
+         import { createApp } from 'vue'
+         import { createPinia } from 'pinia'
+
+         import App from './App.vue'
+         import router from './router'
+
+         import './assets/main.css'
+
+         import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
+         const pinia = createPinia()
+         pinia.use(piniaPluginPersistedstate)
+
+
+         const app = createApp(App)
+
+         app.use(pinia)
+         app.use(router)
+
+         app.mount('#app')
+         
+      [2.3.2] APP.VUE:
+
+         <script setup>
+            import { ref, onMounted } from 'vue'
+            import { RouterLink, RouterView } from 'vue-router'
+
+            import ChevronUp from 'vue-material-design-icons/ChevronUp.vue';
+            import ChevronDown from 'vue-material-design-icons/ChevronDown.vue';
+            import ChevronRight from 'vue-material-design-icons/ChevronRight.vue';
+            import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue';
+         </script>
+
+         <template>
+         <div class="bg-red-400">COOL</div>
+         <routerView/>
+         </template>
+
+      [2.3.3] 
+
+
+
+[3]
